@@ -1,0 +1,458 @@
+{
+  "settings": {
+    "master_seed": 20261109,
+    "n_train_traj": 40,
+    "n_seeds": 10,
+    "n_test_traj": 100,
+    "n_test_starts": 500,
+    "grid": [
+      {
+        "degree": 1,
+        "alpha": 0.01
+      },
+      {
+        "degree": 1,
+        "alpha": 10.0
+      },
+      {
+        "degree": 2,
+        "alpha": 0.01
+      },
+      {
+        "degree": 2,
+        "alpha": 10.0
+      },
+      {
+        "degree": 3,
+        "alpha": 0.01
+      },
+      {
+        "degree": 3,
+        "alpha": 10.0
+      },
+      {
+        "degree": 5,
+        "alpha": 0.01
+      },
+      {
+        "degree": 5,
+        "alpha": 10.0
+      }
+    ],
+    "versions": {
+      "numpy": "2.5.4",
+      "sklearn": "1.9.1"
+    }
+  },
+  "expert_acceptance": {
+    "train_draws": 40000,
+    "train_accepted": 25790,
+    "test_traj_draws": 4000,
+    "test_traj_accepted": 2557,
+    "test_starts_draws": 4000,
+    "test_starts_accepted": 2611
+  },
+  "summary": {
+    "ridge_degree1": {
+      "test_mse_mean": 0.14079589198970333,
+      "test_mse_se_over_seeds": 0.000777795850537508,
+      "test_mse_boot95": [
+        0.1394702844210506,
+        0.1423771115327214
+      ],
+      "success_mean": 0.0,
+      "success_se_over_seeds": 0.0,
+      "success_boot95": [
+        0.0,
+        0.0
+      ],
+      "success_binom_se_single_run": 0.0,
+      "success_upper95_if_zero_pooled": 0.0005989670023148763,
+      "gain_theta_mean": -0.8927335721592762,
+      "gain_omega_mean": -0.08972501305612837,
+      "degrees_chosen": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "alphas_chosen": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ]
+    },
+    "ridge_cv": {
+      "test_mse_mean": 0.04652563588008983,
+      "test_mse_se_over_seeds": 0.0015753200391663998,
+      "test_mse_boot95": [
+        0.0437227674738862,
+        0.049511380893718315
+      ],
+      "success_mean": 0.0,
+      "success_se_over_seeds": 0.0,
+      "success_boot95": [
+        0.0,
+        0.0
+      ],
+      "success_binom_se_single_run": 0.0,
+      "success_upper95_if_zero_pooled": 0.0005989670023148763,
+      "gain_theta_mean": -2.2797231473229895,
+      "gain_omega_mean": -0.24875537774554646,
+      "degrees_chosen": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "alphas_chosen": [
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01,
+        0.01
+      ]
+    },
+    "diagnostics": {
+      "frac_train_clipped_mean": 0.0869375,
+      "frac_train_clipped_range": [
+        0.05325,
+        0.118125
+      ],
+      "unclipped_refit_coef_mean": [
+        -10.913024611309842,
+        -2.876231780323892
+      ],
+      "unclipped_refit_max_rel_err_vs_K": 0.00031847681496766106,
+      "unclipped_refit_success_per_seed": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "difference_cv_minus_degree1": {
+      "test_mse_paired_boot95": [
+        -0.09804864286866032,
+        -0.0904411876801454
+      ],
+      "success_paired_boot95": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "per_seed": [
+    {
+      "seed": 0,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.118125,
+      "diag_unclipped_coef": [
+        -10.912603646305369,
+        -2.8761284829140155
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.15478989764868847,
+      "ridge_degree1_cv_se": 0.015409830426887814,
+      "ridge_degree1_test_mse": 0.13995389464832828,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.9188979502579471,
+      "ridge_degree1_gain_omega": -0.08419565396856031,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.04977446715500056,
+      "ridge_cv_cv_se": 0.004821886124512278,
+      "ridge_cv_test_mse": 0.05495265962544738,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.1219534405885963,
+      "ridge_cv_gain_omega": -0.17082383507838195
+    },
+    {
+      "seed": 1,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.07925,
+      "diag_unclipped_coef": [
+        -10.913691744960412,
+        -2.8764085344141868
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.13651494470653908,
+      "ridge_degree1_cv_se": 0.02293996235101756,
+      "ridge_degree1_test_mse": 0.1393895227280129,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.9282429839311667,
+      "ridge_degree1_gain_omega": -0.0833727936041086,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.04431642777141529,
+      "ridge_cv_cv_se": 0.005509955064474462,
+      "ridge_cv_test_mse": 0.04150139187801119,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.562296840375802,
+      "ridge_cv_gain_omega": -0.2584827189485925
+    },
+    {
+      "seed": 2,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.079,
+      "diag_unclipped_coef": [
+        -10.912691604515713,
+        -2.876148765719091
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.11871165613970316,
+      "ridge_degree1_cv_se": 0.01673878629750906,
+      "ridge_degree1_test_mse": 0.14221984999780193,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.849121203629075,
+      "ridge_degree1_gain_omega": -0.1049786099253068,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.037949683869823704,
+      "ridge_cv_cv_se": 0.004081673142706391,
+      "ridge_cv_test_mse": 0.04977738118844049,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.0213539670119185,
+      "ridge_cv_gain_omega": -0.26888369388244904
+    },
+    {
+      "seed": 3,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.08525,
+      "diag_unclipped_coef": [
+        -10.913546783321113,
+        -2.8763752387244272
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.1413690557924809,
+      "ridge_degree1_cv_se": 0.0196921701500481,
+      "ridge_degree1_test_mse": 0.13933073148092806,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.9184884409426525,
+      "ridge_degree1_gain_omega": -0.08630469306186717,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.048766859315915345,
+      "ridge_cv_cv_se": 0.0028361745777185066,
+      "ridge_cv_test_mse": 0.04238702050985993,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.375169069278992,
+      "ridge_cv_gain_omega": -0.2374348927837791
+    },
+    {
+      "seed": 4,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.093625,
+      "diag_unclipped_coef": [
+        -10.913003371836535,
+        -2.8762190445005413
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.14077595367197632,
+      "ridge_degree1_cv_se": 0.016286701214018363,
+      "ridge_degree1_test_mse": 0.13908170744322873,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.8902318825925077,
+      "ridge_degree1_gain_omega": -0.10236552285975906,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.04929707945790962,
+      "ridge_cv_cv_se": 0.0037727350466837117,
+      "ridge_cv_test_mse": 0.04717506283034351,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.211498230829459,
+      "ridge_cv_gain_omega": -0.2740749766369163
+    },
+    {
+      "seed": 5,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.099125,
+      "diag_unclipped_coef": [
+        -10.912882464675656,
+        -2.876192462119883
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.14626995456651443,
+      "ridge_degree1_cv_se": 0.03328090325198691,
+      "ridge_degree1_test_mse": 0.14020992833152018,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.8993944524456412,
+      "ridge_degree1_gain_omega": -0.08749788075118788,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.05008102000138781,
+      "ridge_cv_cv_se": 0.007307683072371152,
+      "ridge_cv_test_mse": 0.04867213333561389,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.1821318122876994,
+      "ridge_cv_gain_omega": -0.2441706535041832
+    },
+    {
+      "seed": 6,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.05325,
+      "diag_unclipped_coef": [
+        -10.912910958514116,
+        -2.8762005700126627
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.09903776702177226,
+      "ridge_degree1_cv_se": 0.008324424306998384,
+      "ridge_degree1_test_mse": 0.14584229721188727,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.8280392266540002,
+      "ridge_degree1_gain_omega": -0.08486704222563766,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.03411512520349791,
+      "ridge_cv_cv_se": 0.004274977046948344,
+      "ridge_cv_test_mse": 0.041477413589239474,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.3440318475943105,
+      "ridge_cv_gain_omega": -0.28273964699135345
+    },
+    {
+      "seed": 7,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.112125,
+      "diag_unclipped_coef": [
+        -10.912973954284293,
+        -2.876217578841656
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.14541404790981832,
+      "ridge_degree1_cv_se": 0.03500097224102673,
+      "ridge_degree1_test_mse": 0.13829515149977273,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.9435209378656425,
+      "ridge_degree1_gain_omega": -0.08441099005644485,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.04848518754980632,
+      "ridge_cv_cv_se": 0.0066545325892934,
+      "ridge_cv_test_mse": 0.053045662649866654,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.204136139007523,
+      "ridge_cv_gain_omega": -0.20059428284657094
+    },
+    {
+      "seed": 8,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.080625,
+      "diag_unclipped_coef": [
+        -10.912962359554488,
+        -2.876209882104974
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.12544373543198878,
+      "ridge_degree1_cv_se": 0.018066577245726446,
+      "ridge_degree1_test_mse": 0.13952717356129068,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.9086737686756461,
+      "ridge_degree1_gain_omega": -0.08940956685348812,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.04540133488974686,
+      "ridge_cv_cv_se": 0.0032608905464042957,
+      "ridge_cv_test_mse": 0.0444287815438812,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.3538396026593147,
+      "ridge_cv_gain_omega": -0.25430334720365905
+    },
+    {
+      "seed": 9,
+      "n_train_pairs": 8000,
+      "frac_train_clipped": 0.069,
+      "diag_unclipped_coef": [
+        -10.912979225130705,
+        -2.8762172438874836
+      ],
+      "diag_unclipped_success": 1.0,
+      "ridge_degree1_degree": 1,
+      "ridge_degree1_alpha": 0.01,
+      "ridge_degree1_cv_mse": 0.11771535884752478,
+      "ridge_degree1_cv_se": 0.011468393564906088,
+      "ridge_degree1_test_mse": 0.1441086629942626,
+      "ridge_degree1_success": 0.0,
+      "ridge_degree1_success_binom_se": 0.0,
+      "ridge_degree1_gain_theta": -0.8427248745984834,
+      "ridge_degree1_gain_omega": -0.08984737725492314,
+      "ridge_cv_degree": 5,
+      "ridge_cv_alpha": 0.01,
+      "ridge_cv_cv_mse": 0.0394456157158274,
+      "ridge_cv_cv_se": 0.005455793914368567,
+      "ridge_cv_test_mse": 0.04183885165019459,
+      "ridge_cv_success": 0.0,
+      "ridge_cv_success_binom_se": 0.0,
+      "ridge_cv_gain_theta": -2.4208205235962814,
+      "ridge_cv_gain_omega": -0.29604572957957903
+    }
+  ],
+  "runtime_s": 1.9
+}
