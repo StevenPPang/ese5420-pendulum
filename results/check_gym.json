@@ -1,6 +1,6 @@
 {
   "lqr_gain_K": [
-    10.916079783099619,
+    10.916079783099617,
     2.877044754964096
   ],
   "gym_one_step_max_abs_diff": 1.1920929132713809e-08,
@@ -35,8 +35,8 @@
     "agreement": 1.0,
     "ours_success": 0.645,
     "gym_success": 0.645,
-    "whole_run_max_state_diff_median": 5.586309581584459e-09,
-    "whole_run_max_state_diff_max": 2.3364647105950098e-08,
+    "whole_run_max_state_diff_median": 5.5077381544421655e-09,
+    "whole_run_max_state_diff_max": 2.336464177687958e-08,
     "whole_runs_diverging_above_0.1": 0
   },
   "coverage_draws": 8000,

@@ -13,4 +13,4 @@ ridge_degree1: test MSE 0.1408 ± 0.0008 (SE over seeds), 95% boot 0.1395-0.1424
 ridge_cv: test MSE 0.0465 ± 0.0016 (SE over seeds), 95% boot 0.0437-0.0495 | success 0.000 ± 0.000 (seeds), binomial SE of one run 0.000, 95% boot 0.000-0.000, exact one-sided 95% upper bound for one run (0 of 500 rollouts, same starts for every seed) 0.0060 = 0.6% | gain at upright d(u)/d(theta) -2.28, d(u)/d(omega) -0.25
 expert gain at upright: d(u)/d(theta) -10.92, d(u)/d(omega) -2.88; holding upright needs d(u)/d(theta) < -5 (3*K_theta > 15)
 diagnostics: clipped training pairs 8.7% (range 5.3-11.8%); unclipped-only degree-1 refit coef [-10.913, -2.876] (max rel. error vs -K 0.032%), success per seed [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
-runtime 3.1 s
+runtime 4.7 s

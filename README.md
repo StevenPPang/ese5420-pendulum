@@ -33,5 +33,6 @@ cp -r results results_committed                          # keep the committed nu
 .venv/bin/python run_baseline.py                         # writes results/ and baseline.png, a few seconds
 .venv/bin/python compare_results.py results_committed/results.json results/results.json
 ```
-The master seed is 20261109. With the same seed and package versions the last command prints
+Every file in `results/` and `baseline.png` comes from one run of `check_gym.py` followed by `run_baseline.py` with
+this code. The master seed is 20261109. With the same seed and package versions the last command prints
 `0 field(s) differ` (raw floats may differ in the last digits; the comparison uses a 1e-9 relative tolerance).
