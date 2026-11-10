@@ -1,4 +1,4 @@
-"""Steps 2-4: fixed test sets, 10 training seeds x 40 expert trajectories, ridge tuned by grouped 5-fold CV,
+"""Steps 2-3 of the instructor's first steps: fixed test sets, 10 training seeds x 40 expert trajectories, ridge tuned by grouped 5-fold CV,
 then test torque MSE and closed-loop success with error bars.
 
 Run:  python run_baseline.py
@@ -64,6 +64,7 @@ def main():
         # Diagnostic only (not a baseline, not tuned): degree-1 ridge fit on the unclipped pairs alone.
         un = np.abs(y) < U_MAX - 1e-9
         diag = make_model(1, 0.01).fit(X[un], y[un])
+        # pipeline steps: [PolynomialFeatures, StandardScaler, Ridge]; diag[1] is the scaler
         coef = diag[-1].coef_ / diag[1].scale_      # undo the scaler -> torque per rad, per rad/s
         rec["diag_unclipped_coef"] = coef.tolist()
         rec["diag_unclipped_success"] = float(success(rollout(as_policy(diag), x0_test_cl)[0]).mean())
@@ -85,6 +86,7 @@ def main():
             f"deg1: MSE {rec['ridge_degree1_test_mse']:.4f}, success {rec['ridge_degree1_success']:.3f} | "
             f"CV: MSE {rec['ridge_cv_test_mse']:.4f}, success {rec['ridge_cv_success']:.3f}")
 
+    # stream 4 (5th child of the master seed): bootstrap resampling only; streams 0-3 are built in data.streams()
     boot = np.random.default_rng(np.random.SeedSequence(MASTER_SEED).spawn(5)[4])
     summary = {}
     for name in MODELS:
@@ -96,8 +98,10 @@ def main():
             "test_mse_mean": m_mse, "test_mse_se_over_seeds": se_mse, "test_mse_boot95": bootstrap_ci(mse, boot),
             "success_mean": m_suc, "success_se_over_seeds": se_suc, "success_boot95": bootstrap_ci(suc, boot),
             "success_binom_se_single_run": binomial_se(m_suc, N_TEST_STARTS),
-            "success_upper95_if_zero_pooled": (zero_success_upper95(N_TEST_STARTS * N_SEEDS)
-                                               if max(suc) == 0 else None),
+            # The 500 test starts are independent draws, but every seed rolls out the SAME 500 starts, so the
+            # 10 seeds are not 5000 independent trials: the exact bound is the one for a single run of 500.
+            "success_upper95_if_zero_single_run": (zero_success_upper95(N_TEST_STARTS)
+                                                   if max(suc) == 0 else None),
             "gain_theta_mean": mean_se([r[f"{name}_gain_theta"] for r in per_seed])[0],
             "gain_omega_mean": mean_se([r[f"{name}_gain_omega"] for r in per_seed])[0],
             "degrees_chosen": [r[f"{name}_degree"] for r in per_seed],
@@ -138,12 +142,14 @@ def main():
         w.writerows(cv_rows_all)
     for name in MODELS:
         v = summary[name]
+        bound = v["success_upper95_if_zero_single_run"]
+        bound_txt = (f", exact one-sided 95% upper bound for one run (0 of {N_TEST_STARTS} rollouts, same starts "
+                     f"for every seed) {bound:.4f} = {100 * bound:.1f}%" if bound is not None else "")
         say(f"{name}: test MSE {v['test_mse_mean']:.4f} ± {v['test_mse_se_over_seeds']:.4f} (SE over seeds), "
             f"95% boot {v['test_mse_boot95'][0]:.4f}-{v['test_mse_boot95'][1]:.4f} | success "
             f"{v['success_mean']:.3f} ± {v['success_se_over_seeds']:.3f} (seeds), binomial SE of one run "
             f"{v['success_binom_se_single_run']:.3f}, 95% boot {v['success_boot95'][0]:.3f}-{v['success_boot95'][1]:.3f}"
-            + (f", one-sided 95% upper bound (0 of {N_TEST_STARTS * N_SEEDS} rollouts) "
-               f"{v['success_upper95_if_zero_pooled']:.4f}" if v["success_upper95_if_zero_pooled"] else "")
+            + bound_txt
             + f" | gain at upright d(u)/d(theta) {v['gain_theta_mean']:.2f}, d(u)/d(omega) {v['gain_omega_mean']:.2f}")
     say(f"expert gain at upright: d(u)/d(theta) {-K_LQR[0]:.2f}, d(u)/d(omega) {-K_LQR[1]:.2f}; "
         f"holding upright needs d(u)/d(theta) < -5 (3*K_theta > 15)")

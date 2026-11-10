@@ -8,10 +8,10 @@ Tree: Liangyu
 - All eight ridge settings were fixed in advance.
 
 ## Data
-We simulate Pendulum-v1 (g=10, m=l=1, 0.05 s steps, torque limit 2, speed limit 8). The expert is LQR, linear feedback u = -K·state with K=[10.92, 2.88], clipped to ±2. Inputs: angle from upright and angular velocity; output: expert torque. Each training set has 40 ten-second trajectories: N=8,000 pairs, none dropped. We keep only starts the expert stabilizes (64.0%, SE 0.5%, of 8,000 uniform draws). Test sets: 100 new expert trajectories (20,000 pairs) and 500 starts where the model drives the pendulum (closed loop). Success: |angle| < 0.1 rad and |velocity| < 0.5 rad/s over the last 20 states.
+We simulate Pendulum-v1 (g=10, m=l=1, 0.05 s steps, torque limit 2, speed limit 8). The expert is LQR, u = -K·state with K=[10.92, 2.88], clipped to ±2. Inputs: angle from upright and angular velocity; output: expert torque. Each training set has 40 ten-second trajectories: N=8,000 pairs, none dropped. We keep only starts the expert stabilizes: 64.0% of 8,000 uniform draws (SE 0.5%). Test sets: 100 new expert trajectories (20,000 pairs) and 500 closed-loop starts (the model drives). Success: |angle| < 0.1 rad and |velocity| < 0.5 rad/s over the last 20 states.
 
 ## Split
-5-fold cross-validation (CV) keeps each trajectory's 200 correlated pairs in one fold; scaling and polynomial features are fit within folds. One master seed (20261109) feeds separate streams for training, test trajectories and test starts; training repeats over 10 seeds. The fixed test sets are used only after CV picks a setting.
+5-fold cross-validation (CV) keeps each trajectory's 200 correlated pairs in one fold; scaling and polynomial features are fit within folds. One master seed (20261109) feeds separate streams for training, test trajectories and test starts; training repeats over 10 seeds. Test sets stay untouched until CV picks a setting.
 
 ## Baseline
 Ridge on polynomial features (Module 5), grid degree {1, 2, 3, 5} × penalty {0.01, 10}, predictions clipped to ±2. CV chose degree 5, penalty 0.01, for all 10 seeds.
@@ -19,21 +19,21 @@ Ridge on polynomial features (Module 5), grid degree {1, 2, 3, 5} × penalty {0.
 ## Result
 Ridge imitates expert torque closely but never balances the pendulum.
 
-Test torque MSE, mean ± SE over 10 training seeds (bootstrap 95% interval, 10,000 resamples of training runs):
+Test torque MSE, mean ± SE over 10 training seeds (bootstrap 95% interval, 10,000 resamples of seeds):
 - CV-chosen ridge: 0.0465 ± 0.0016 (0.0437 to 0.0495)
 - Degree-1 ridge: 0.1408 ± 0.0008 (0.1395 to 0.1424)
 - CV-chosen minus degree 1: -0.094 (paired: -0.098 to -0.090)
 
-Closed-loop success: 0 of 500 starts for every seed and both models (the expert: all, by construction). With zero successes the standard error is zero, so we give the exact one-sided 95% upper bound for one run: 0.6%.
+Closed-loop success: 0 of 500 starts for every seed and both models (the expert: all, by construction). With zero successes the SE is zero, so we give the exact one-sided 95% upper bound per run: 0.6%.
 
 ## Issues found
-- Low MSE did not give a working controller. Near upright, ridge's gain (torque per radian of tilt) is -0.9 (degree 1) or -2.3 (degree 5); the expert's is -10.9, and anything weaker than -5 leaves upright unstable. Clipped pairs (8.7% of training data, 5.3-11.8% across seeds) flatten the least-squares fit: refitting degree 1 without them recovers K within 0.03% and succeeds on every start. That refit uses the clipping labels, so it is a diagnosis, not a baseline.
+- Low MSE did not give a working controller. Near upright, ridge's gain (torque per radian of tilt) is -0.9 (degree 1) or -2.3 (degree 5). The expert's is -10.9, and anything weaker than -5 leaves upright unstable. Clipped pairs (8.7% of training data, 5.3-11.8% across seeds) flatten the least-squares fit: refitting degree 1 without them recovers K within 0.03% and succeeds on every start. That refit uses the clipping labels, so it is a diagnosis, not a baseline.
 - CV picked the grid's corner (highest degree, smallest penalty); the grid may be too narrow.
 - Degree 2 ties degree 1 (CV MSE 0.133), as expected for an odd target function.
 - Our simulator matches Gymnasium within 1.2e-8 per step and 2.3e-8 over whole runs (Gymnasium uses float32 for the torque term); outcomes matched on 200 of 200 starts.
 
 ## Next steps
-By Monday, November 16, Liangyu will add a random forest and an MLP (eight preset settings each), run 10 to 160 training trajectories, add the angle-tolerance panel (0.05 to 0.5 rad), and test a wider ridge grid chosen by CV alone.
+By November 16, Liangyu will add a random forest and an MLP (eight preset settings each), run 10 to 160 training trajectories, add the angle-tolerance panel (0.05 to 0.5 rad), and let CV alone choose from a wider ridge grid.
 
 ## Code
 https://github.com/StevenPPang/ese5420-pendulum
