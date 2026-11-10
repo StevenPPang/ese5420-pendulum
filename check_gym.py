@@ -1,4 +1,4 @@
-"""Step 1: check our simulator against Gymnasium's Pendulum-v1, and measure how many uniform starts the expert
+"""Step 1: check this simulator against Gymnasium's Pendulum-v1, and measure how many uniform starts the expert
 stabilizes.  Run:  python check_gym.py   (writes results/check_gym.json)"""
 import json
 from pathlib import Path
@@ -15,7 +15,7 @@ OUT.mkdir(exist_ok=True)
 
 
 def compare_with_gym(rng, n_runs=6, n_agree=200):
-    """(a) One-step check: from Gymnasium's own state, does our step() give Gymnasium's next state?
+    """(a) One-step check: from Gymnasium's own state, does this step() give Gymnasium's next state?
     (b) Outcome check: from the same starts, do the two simulators agree on whether the expert succeeds?
     Long multi-step comparisons are not meaningful when the pendulum swings chaotically: float rounding
     (1e-16) grows until the two copies separate, even though every individual step agrees."""
